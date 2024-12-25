@@ -1,0 +1,36 @@
+{
+  "name": "caballo-client",
+  "version": "1.0.1",
+  "description": "A Deno project targeting Node.js 18+ with ESM support",
+  "keywords": [
+    "deno",
+    "node",
+    "esm",
+    "validation"
+  ],
+  "author": "Raul Lugo",
+  "repository": {
+    "type": "git",
+    "url": "https://git.rlugo.dev/raul/caballo-client.git"
+  },
+  "license": "MIT",
+  "main": "./mod.js",
+  "module": "./esm/mod.js",
+  "exports": {
+    ".": {
+      "import": "./esm/mod.js",
+      "require": "./script/mod.js"
+    }
+  },
+  "scripts": {
+    "test": "node test.js"
+  },
+  "type": "module",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.9.0"
+  },
+  "_generatedBy": "dnt@0.40.0"
+}

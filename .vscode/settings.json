@@ -1,0 +1,13 @@
+{
+    "deno.enable": true,
+    "editor.fontSize": 16,
+    "terminal.integrated.fontSize": 16,
+    "[json]": {
+      "editor.formatOnSave": true,
+      "editor.defaultFormatter": "denoland.vscode-deno"
+    },
+    "[typescript]": {
+      "editor.formatOnSave": true,
+      "editor.defaultFormatter": "denoland.vscode-deno"
+    }
+}

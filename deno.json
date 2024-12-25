@@ -1,0 +1,22 @@
+{
+  "tasks": {
+    "test": "deno test --allow-read",
+    "check": "deno check ./src/mod.ts",
+    "fmt": "deno fmt",
+    "lint": "deno lint",
+    "example:xml": "deno run --allow-read --allow-net examples/validateXml.ts",
+    "build:npm": "deno run --allow-all dnt.config.mts"
+  },
+  "fmt": {
+    "useTabs": false,
+    "lineWidth": 80,
+    "indentWidth": 2,
+    "semiColons": true,
+    "singleQuote": false,
+    "proseWrap": "preserve",
+    "include": ["src/", "examples/", "mod.ts"]
+  },
+  "lint": {
+    "exclude": ["npm/"]
+  }
+}
