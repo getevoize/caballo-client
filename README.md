@@ -6,7 +6,6 @@ Type-safe Deno/Node.js client for validating e-Invoices against EU standards usi
 - [Description](#description)
   - [Key Features](#key-features)
 - [Installation](#installation)
-  - [Deno](#deno)
   - [Node.js](#nodejs)
 - [Usage](#usage)
 - [API Reference](#api-reference)
@@ -31,11 +30,6 @@ Caballo Client is a modern TypeScript library for validating electronic invoices
 - Clear error handling with detailed validation results
 
 ## Installation
-
-### Deno
-```ts
-import { CaballoClient } from "https://deno.land/x/caballo_client@v1.0.0/mod.ts";
-```
 
 ### Node.js
 ```bash

@@ -1,0 +1,50 @@
+name: Publish to NPM
+
+on:
+  push:
+    tags:
+      - "v*.*.*" # Matches version tags like v1.0.0, v2.3.4, etc.
+
+env:
+  DIST_FOLDER: dist
+
+jobs:
+  build-and-publish:
+    name: Build and Publish to NPM
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Checkout Repository
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      # 2. Extract Tag Version
+      - name: Extract Tag Version
+        id: tag_version
+        run: |
+          echo "TAG_VERSION=${GITHUB_REF#refs/tags/v}" >> $GITHUB_ENV
+          echo "Extracted Tag Version: ${GITHUB_REF#refs/tags/v}"
+
+      # 3. Install Deno
+      - name: Install Deno
+        uses: denoland/setup-deno@v1
+        with:
+          deno-version: v1.x # Use the latest stable version of Deno
+
+      # 4. Inject Version into `dnt.config.mts`
+      - name: Update Version in dnt.config.mts
+        run: |
+          sed -i "s/\"version\": \"<RELEASE_VERSION_PLACEHOLDER>\"/\"version\": \"${{ env.TAG_VERSION }}\"/" dnt.config.mts
+          echo "Updated version in dnt.config.mts to ${{ env.TAG_VERSION }}"
+
+      # 5. Run build:npm
+      - name: Build NPM Package
+        run: deno task build:npm
+
+      # 6. Publish to NPM
+      - name: Publish to NPM
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: |
+          cd ${{ env.DIST_FOLDER }}
+          npm publish --access public

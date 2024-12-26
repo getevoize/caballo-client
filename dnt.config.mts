@@ -10,7 +10,7 @@ await build({
   },
   package: {
     name: "caballo-client",
-    version: "1.0.1",
+    version: "<RELEASE_VERSION_PLACEHOLDER>",
     description: "A Deno project targeting Node.js 18+ with ESM support",
     license: "MIT",
     author: "Raul Lugo",
