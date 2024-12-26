@@ -25,18 +25,23 @@ jobs:
           echo "TAG_VERSION=${GITHUB_REF#refs/tags/v}" >> $GITHUB_ENV
           echo "Extracted Tag Version: ${GITHUB_REF#refs/tags/v}"
 
-      # 3. Install Deno v2
+      # 3. Replace Version Placeholder in `dnt.config.mts`
+      - name: Replace Version Placeholder
+        uses: bluwy/substitute-string-action@v3
+        with:
+          _input-file: 'dnt.config.mts'
+          _output-file: 'dnt.config.mts' # Overwrite the same file
+          _format-key: '<key>'           # Use '<>' as placeholder delimiters
+          RELEASE_VERSION_PLACEHOLDER: ${{ env.TAG_VERSION }}
+
+      - name: Validate Version Substitution
+        run: grep 'version' dnt.config.mts
+      
+      # 4. Install Deno v2
       - name: Install Deno
         uses: denoland/setup-deno@v1
         with:
           deno-version: v2.x # Use the latest stable Deno v2
-
-      # 4. Inject Version into `dnt.config.mts`
-      - name: Update Version in dnt.config.mts
-        run: |
-          sed -i "s/\"version\": \"<RELEASE_VERSION_PLACEHOLDER>\"/\"version\": \"${{ env.TAG_VERSION }}\"/" dnt.config.mts
-          echo "Updated version in dnt.config.mts to ${{ env.TAG_VERSION }}"
-          cat dnt.config.mts
 
       # 5. Run build:npm
       - name: Build NPM Package
