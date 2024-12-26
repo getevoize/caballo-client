@@ -49,8 +49,7 @@ jobs:
 
       # 6. Publish to NPM
       - name: Publish to NPM
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: |
-          cd ${{ env.DIST_FOLDER }}
-          npm publish --access public
+        uses: JS-DevTools/npm-publish@v1
+        with:
+          token: ${{ secrets.NPM_TOKEN }}
+          package: './dist'
