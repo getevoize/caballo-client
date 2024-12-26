@@ -36,6 +36,7 @@ jobs:
         run: |
           sed -i "s/\"version\": \"<RELEASE_VERSION_PLACEHOLDER>\"/\"version\": \"${{ env.TAG_VERSION }}\"/" dnt.config.mts
           echo "Updated version in dnt.config.mts to ${{ env.TAG_VERSION }}"
+          cat dnt.config.mts
 
       # 5. Run build:npm
       - name: Build NPM Package
