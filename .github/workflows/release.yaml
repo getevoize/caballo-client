@@ -47,10 +47,11 @@ jobs:
       - name: Build NPM Package
         run: deno task build:npm
 
+      - name: Setup .npmrc
+        run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
+
       # 6. Publish to NPM
       - name: Publish to NPM
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: |
           cd ${{ env.DIST_FOLDER }}
           npm publish --access public
