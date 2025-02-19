@@ -15,6 +15,7 @@ await build({
     license: "MIT",
     author: "Raul Lugo",
     main: "./mod.js",
+    types: "./mod.d.ts",
     type: "module",
     engines: {
       node: ">=18.0.0",
@@ -24,7 +25,7 @@ await build({
     },
     repository: {
       type: "git",
-      url: "https://git.rlugo.dev/raul/caballo-client.git",
+      url: "https://github.com/getevoize/caballo-client",
     },
     keywords: ["deno", "node", "esm", "validation"],
   },
